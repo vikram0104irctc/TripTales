@@ -13,7 +13,6 @@ import {
 const Cardtwo = () => {
   let navigate = useNavigate();
 
-  // Function to dynamically load the Razorpay SDK
   const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -26,35 +25,33 @@ const Cardtwo = () => {
 
   async function paymentHandler(e) {
     e.preventDefault();
-
-    // Load the Razorpay SDK script
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
     if (!res) {
       toast.error("Razorpay SDK failed to load. Please check your connection.");
       return;
     }
 
     let obj = {
-      amount: 10000, // amount in paise (10000 paise = ₹100)
+      amount: 10000,
       currency: "INR",
       receipt: "qwsaq1",
     };
 
-    // Create order on server
     axios
       .post("http://localhost:3000/order", obj)
       .then((res) => {
         const options = {
-          key: "rzp_test_i6kJlpxdFLeWaE", // Replace with your Razorpay Key ID
+          key: "rzp_test_i6kJlpxdFLeWaE",
           amount: obj.amount,
           currency: obj.currency,
           name: "Trip Tales",
           description: "Test Transaction",
-          image: "/logo.svg", // Replace with your logo
+          image: "/logo.svg",
           order_id: res.data.id,
           handler: function (response) {
             toast.success("Payment Success");
-            toast.success("Payment ID: " + response.razorpay_payment_id);
             navigate("/");
           },
           prefill: {
@@ -70,11 +67,9 @@ const Cardtwo = () => {
           },
         };
 
-        // Initialize Razorpay
         const rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response) {
           alert("Payment failed due to " + response.error.reason);
-          alert("Order ID: " + response.error.metadata.order_id);
           alert("Payment ID: " + response.error.metadata.payment_id);
         });
         rzp1.open();

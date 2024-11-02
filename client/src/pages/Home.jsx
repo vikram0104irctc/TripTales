@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import Carousels from "@/utils/Carousel";
 import Citiescard from "@/utils/Citiescard";
+import Queries from "@/utils/Queries";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   return (
-    <div className="max-w-[1360px] m-auto mt-[80px] px-4 md:mb-24">
+    <div className="max-w-[1360px] m-auto mt-[80px] px-4 mb-16">
       <div className="relative h-[250px] md:h-[450px]">
         <img
           src="/hero-banner-bg-image.jpeg"
@@ -21,6 +24,7 @@ const Home = () => {
           </p>
           <div className="mt-6">
             <Button
+              onClick={() => navigate("/generatetrip")}
               variant="secondary"
               className="rounded-full text-lg py-6 px-6"
             >
@@ -37,7 +41,10 @@ const Home = () => {
         Designed for vacations and everyday adventures.
       </p>
       <div className="flex justify-center items-center mt-8">
-        <Button className="rounded-full text-lg py-6 px-6 bg-[#1ba0e2]">
+        <Button
+          onClick={() => navigate("/generatetrip")}
+          className="rounded-full text-lg py-6 px-6 bg-[#1ba0e2]"
+        >
           🚀 Create a new trip
         </Button>
       </div>
@@ -57,6 +64,14 @@ const Home = () => {
       </div>
 
       <Carousels />
+
+      <div className="flex justify-center">
+        <h2 className="text-3xl md:text-4xl font-bold mt-12 px-1 text-center">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <Queries />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.svg"
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
@@ -14,7 +15,7 @@ const Navbar = () => {
           onClick={() => navigate("/")}
           className="flex gap-1 items-center cursor-pointer"
         >
-          <img width={50} src="./logo.svg" />
+          <img width={50} src={logo} />
           <h2 className="font-bold text-xl leading-3 cursor-pointer">
             TripTales
           </h2>

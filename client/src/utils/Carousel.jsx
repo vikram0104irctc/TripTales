@@ -10,7 +10,7 @@ import {
 
 const Carousels = () => {
   return (
-    <div className="w-full md:h-[350px] lg:h-[450px] px-10 mt-8">
+    <div className="w-full md:h-[400px] lg:h-[500px] px-10 mt-8">
       <Carousel className="w-full h-[100%]">
         <CarouselContent>
           <CarouselItem>
