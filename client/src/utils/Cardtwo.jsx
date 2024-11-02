@@ -13,26 +13,48 @@ import {
 const Cardtwo = () => {
   let navigate = useNavigate();
 
-  function paymentHandler(e) {
+  // Function to dynamically load the Razorpay SDK
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  async function paymentHandler(e) {
+    e.preventDefault();
+
+    // Load the Razorpay SDK script
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    if (!res) {
+      toast.error("Razorpay SDK failed to load. Please check your connection.");
+      return;
+    }
+
     let obj = {
-      amount: 10000,
+      amount: 10000, // amount in paise (10000 paise = ₹100)
       currency: "INR",
       receipt: "qwsaq1",
     };
+
+    // Create order on server
     axios
       .post("http://localhost:3000/order", obj)
       .then((res) => {
-        var options = {
-          key: "rzp_test_i6kJlpxdFLeWaE",
+        const options = {
+          key: "rzp_test_i6kJlpxdFLeWaE", // Replace with your Razorpay Key ID
           amount: obj.amount,
           currency: obj.currency,
           name: "Trip Tales",
           description: "Test Transaction",
-          image: "/logo.svg",
+          image: "/logo.svg", // Replace with your logo
           order_id: res.data.id,
           handler: function (response) {
             toast.success("Payment Success");
-            toast.success("PaymentID" + " " + response.razorpay_payment_id);
+            toast.success("Payment ID: " + response.razorpay_payment_id);
             navigate("/");
           },
           prefill: {
@@ -47,21 +69,18 @@ const Cardtwo = () => {
             color: "#3399cc",
           },
         };
-        var rzp1 = new window.Razorpay(options);
+
+        // Initialize Razorpay
+        const rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
+          alert("Payment failed due to " + response.error.reason);
+          alert("Order ID: " + response.error.metadata.order_id);
+          alert("Payment ID: " + response.error.metadata.payment_id);
         });
         rzp1.open();
-        e.preventDefault();
       })
       .catch(() => {
-        toast.error("Error sending payment");
+        toast.error("Error initiating payment. Please try again.");
       });
   }
 
@@ -96,7 +115,7 @@ const Cardtwo = () => {
           />
           <FeatureItem
             icon={<Check className="h-5 w-5 text-green-500" />}
-            text="Customer Managemet"
+            text="Customer Management"
             inactive
           />
           <FeatureItem
