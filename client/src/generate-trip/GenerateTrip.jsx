@@ -145,15 +145,17 @@ const GenerateTrip = () => {
                 <div
                   key={ele.id}
                   onClick={() => setBudgetValue(ele.title)}
-                  className={`p-2 shadow-md rounded-md border ${
+                  className={`p-2 cursor-pointer shadow-md rounded-md border ${
                     budgetValue == ele.title
                       ? "shadow-lg border-2 border-black"
                       : "shadow-md"
                   }`}
                 >
-                  <h2 className="text-2xl">{ele.icon}</h2>
-                  <p className="font-bold">{ele.title}</p>
-                  <p className="text-sm text-gray-600">{ele.desc}</p>
+                  <h2 className="text-2xl cursor-pointer">{ele.icon}</h2>
+                  <p className="font-bold cursor-pointer">{ele.title}</p>
+                  <p className="text-sm text-gray-600 cursor-pointer">
+                    {ele.desc}
+                  </p>
                 </div>
               );
             })}
@@ -171,15 +173,17 @@ const GenerateTrip = () => {
                     setTravelValue(ele.title);
                     setPeopleValue(ele.people);
                   }}
-                  className={`p-2 shadow-md rounded-md border ${
+                  className={`p-2 cursor-pointer shadow-md rounded-md border ${
                     travelValue == ele.title
                       ? "shadow-lg border-2 border-black"
                       : "shadow-md"
                   }`}
                 >
-                  <h2 className="text-2xl">{ele.icon}</h2>
-                  <p className="font-bold">{ele.title}</p>
-                  <p className="text-sm text-gray-600">{ele.desc}</p>
+                  <h2 className="text-2xl cursor-pointer">{ele.icon}</h2>
+                  <p className="font-bold cursor-pointer">{ele.title}</p>
+                  <p className="text-sm text-gray-600 cursor-pointer">
+                    {ele.desc}
+                  </p>
                 </div>
               );
             })}

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.svg"
+import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
