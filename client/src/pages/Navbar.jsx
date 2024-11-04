@@ -7,7 +7,6 @@ import logo from "../assets/logo.svg"
 const Navbar = () => {
   const { isSignedIn } = useUser();
   let navigate = useNavigate();
-  // console.log(user?.emailAddresses[0]?.emailAddress);
   return (
     <div className="w-full fixed top-0 left-0 shadow-md z-50 bg-white">
       <div className="max-w-[1400px] m-auto flex justify-between items-center py-4 px-4">

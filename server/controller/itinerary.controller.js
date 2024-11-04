@@ -33,7 +33,6 @@ const createItinerary = async (req, res) => {
         description: hotel.description,
       })),
       daily_itinerary: parsedResponse.daily_itinerary.map((day) => ({
-
         day: day.day,
         places: day.places.map((place) => ({
           place_name: place.place_name,
@@ -71,6 +70,6 @@ const getSpecificPlan = async (req, res) => {
   } catch (e) {
     res.status(500).json({ message: "Server error" });
   }
-}
+};
 
 module.exports = { createItinerary, getSpecificPlan };

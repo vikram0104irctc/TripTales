@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const GenerateTrip = () => {
   let navigate = useNavigate();
@@ -17,6 +18,7 @@ const GenerateTrip = () => {
   const [travelValue, setTravelValue] = useState("");
   const [peopleValue, setPeopleValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const provider = new OpenStreetMapProvider();
 
   const handleInputChange = async (e) => {
@@ -58,9 +60,11 @@ const GenerateTrip = () => {
       people: peopleValue,
       email: email,
     };
+    setLoading(true);
     axios
       .post("http://localhost:3000/generateitinerary", obj)
       .then((res) => {
+        setLoading(false);
         toast.success("Trip generated successfully");
         setInputValue("");
         setDayValue("");
@@ -70,25 +74,10 @@ const GenerateTrip = () => {
         navigate(`/trip/${res.data.data._id}`);
       })
       .catch((err) => {
+        setLoading(false);
         toast.error("Error generating trip. Please try again.");
       });
   }
-
-  // const fetchHotelImages = async () => {
-  //   const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
-  //   const response = await axios.get(
-  //     `https://api.pexels.com/v1/search?query=hotel+katihar&per_page=1`,
-  //     {
-  //       headers: {
-  //         Authorization: apiKey,
-  //       },
-  //     }
-  //   );
-  //   let data = response.data.photos.map(photo => photo.src.large);
-  //   console.log(data[0]);
-  // };
-
-  // fetchHotelImages();
 
   return (
     <div className="max-w-[800px] m-auto mt-[90px] px-4">
@@ -197,7 +186,13 @@ const GenerateTrip = () => {
           </div>
         </div>
         <div className="mt-6 flex justify-end">
-          <Button onClick={handleTripGnerate}>Create Plan</Button>
+          <Button disabled={loading} onClick={handleTripGnerate}>
+            {loading ? (
+              <AiOutlineLoading3Quarters className="animate-spin cursor-pointer" />
+            ) : (
+              "Create Plan"
+            )}
+          </Button>
         </div>
       </div>
     </div>
