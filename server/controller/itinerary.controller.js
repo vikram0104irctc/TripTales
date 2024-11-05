@@ -27,7 +27,10 @@ const createItinerary = async (req, res) => {
       hotel_options: parsedResponse.hotel_options.map((hotel) => ({
         hotel_name: hotel.hotel_name,
         hotel_address: hotel.hotel_address,
-        price_per_night: parseInt(hotel.price_per_night?.replace(/[^0-9]/g, "")),
+        price_per_night:
+          typeof hotel.price_per_night == "number"
+            ? hotel.price_per_night
+            : parseInt(hotel.price_per_night.replace(/[^0-9]/g, "")),
         geo_coordinates: hotel.geo_coordinates,
         rating: hotel.rating,
         description: hotel.description,
