@@ -40,7 +40,7 @@ const Cardtwo = () => {
     };
 
     axios
-      .post("http://localhost:3000/order", obj)
+      .post("https://triptales-nm5q.onrender.com/order", obj)
       .then((res) => {
         const options = {
           key: "rzp_test_i6kJlpxdFLeWaE",

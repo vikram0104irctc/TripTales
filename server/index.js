@@ -11,6 +11,13 @@ app.use(express.json());
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to TripTales!",
+    health: "Working Fine",
+  });
+});
+
 app.use("/order", paymentRoute);
 
 app.use("/cities", cityRoute);

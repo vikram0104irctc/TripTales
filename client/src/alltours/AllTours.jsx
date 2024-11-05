@@ -14,7 +14,7 @@ const AllTours = () => {
   useEffect(() => {
     if (email) {
       axios
-        .get(`http://localhost:3000/generateitinerary/allplan/${email}`)
+        .get(`https://triptales-nm5q.onrender.com/generateitinerary/allplan/${email}`)
         .then((res) => {
           setPlan(res.data.data);
         })

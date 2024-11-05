@@ -8,7 +8,7 @@ const Citiescard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/cities")
+      .get("https://triptales-nm5q.onrender.com/cities")
       .then((res) => setData(res.data))
       .catch(() => toast.error("Some error occurred"));
   }, []);
