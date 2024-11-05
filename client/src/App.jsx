@@ -11,6 +11,7 @@ import { Footer } from "./pages/Footer";
 import CityDetails from "./city/[cityid]";
 import GenerateTrip from "./generate-trip/GenerateTrip";
 import FinalTrip from "./trip/[tripid]";
+import AllTours from "./alltours/AllTours";
 
 function App() {
   const { isLoaded, isSignedIn } = useUser();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/alltours" element={<AllTours />} />
         <Route path="/city/:cityid" element={<CityDetails />} />
         <Route path="/generatetrip" element={<GenerateTrip />} />
         <Route path="/trip/:tripid" element={<FinalTrip />} />

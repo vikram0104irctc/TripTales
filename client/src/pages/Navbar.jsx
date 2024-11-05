@@ -20,11 +20,19 @@ const Navbar = () => {
           </h2>
         </div>
         {isSignedIn ? (
-          <div className="flex gap-5 md:gap-10">
+          <div className="flex gap-3 md:gap-8">
+            <div>
+              <p
+                onClick={() => navigate("/alltours")}
+                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800"
+              >
+                Tours
+              </p>
+            </div>
             <div>
               <p
                 onClick={() => navigate("/pricing")}
-                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800"
+                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800 hidden md:block"
               >
                 Pricing
               </p>

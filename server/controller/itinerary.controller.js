@@ -54,7 +54,6 @@ const createItinerary = async (req, res) => {
     await itinerary.save();
     res.json({ message: "Itinerary created successfully", data: itinerary });
   } catch (error) {
-    console.error("Error creating itinerary:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -72,4 +71,17 @@ const getSpecificPlan = async (req, res) => {
   }
 };
 
-module.exports = { createItinerary, getSpecificPlan };
+const getAllPlan = async (req, res) => {
+  const { email } = req.params;
+  try {
+    const itinerary = await Itinerary.find({ useremail: email });
+    if (!itinerary) {
+      return res.status(404).json({ message: "Itinerary not found" });
+    }
+    res.json({ message: "Itinerary found successfully", data: itinerary });
+  } catch (e) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+module.exports = { createItinerary, getSpecificPlan, getAllPlan };

@@ -3,7 +3,6 @@ import DiningOptions from "./DiningOptions";
 import PlacesToVisit from "./PlacesToVisit";
 
 const DailyOptions = ({ plan }) => {
-  console.log(plan);
   return (
     <div className="px-2">
       <h2 className="text-xl md:text-2xl font-bold mt-8">Day Wise Plan</h2>
