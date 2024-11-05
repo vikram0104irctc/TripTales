@@ -24,7 +24,7 @@ const Navbar = () => {
             <div>
               <p
                 onClick={() => navigate("/alltours")}
-                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800 hover:bg-[#1ba0e2] hover:text-white hover:border-none"
+                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800 hover:bg-[#1ba0e2] hover:text-white hover:border-none transition:all duration-300 ease-in-out"
               >
                 Tours
               </p>
@@ -32,7 +32,7 @@ const Navbar = () => {
             <div>
               <p
                 onClick={() => navigate("/pricing")}
-                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800 hidden md:block hover:bg-[#1ba0e2]"
+                className="border py-1 px-3 rounded-lg cursor-pointer border-gray-800 hidden md:block hover:bg-[#1ba0e2] hover:text-white hover:border-none transition:all duration-300 ease-in-out"
               >
                 Pricing
               </p>
